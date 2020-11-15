@@ -1,0 +1,48 @@
+plugins {
+    id "base"
+    id "idea"
+    id "org.jetbrains.kotlin.jvm" version "1.3.70"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // logging deps
+    compile "org.slf4j:slf4j-api:1.7.30"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+
+    // database deps
+    compile 'com.zaxxer:HikariCP:3.4.2'
+    compile 'org.postgresql:postgresql:42.2.11'
+    compile 'com.h2database:h2:1.4.200'
+
+    compile 'org.jetbrains.exposed:exposed-core:0.22.1'
+    compile 'org.jetbrains.exposed:exposed-dao:0.22.1'
+    compile 'org.jetbrains.exposed:exposed-jdbc:0.22.1'
+    compile 'org.jetbrains.exposed:exposed-jodatime:0.22.1'
+    compile 'org.jetbrains.exposed:exposed-java-time:0.22.1'
+
+    // simple api router
+    compile 'io.javalin:javalin:3.7.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
+    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3'
+
+    testCompile 'io.kotlintest:kotlintest-runner-junit5:3.4.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+test {
+    testLogging {
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
+    }
+}
